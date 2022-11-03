@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route, Link } from 'react-router-dom';
+import { SkillProvider } from './context/SkillContext';
+
+import { Home } from './components/Home';
+import { SkillIndex } from './components/skills/SkillIndex';
+import { SkillCreate } from './components/skills/SkillCreate';
+import { SkillEdit } from './components/skills/SkillEdit';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <SkillProvider>
+      <div className="container">
+        <div className="row">
+          <div className="col-sm-2">
+            <Link type='button' to="/" className='btn btn-primary'>Home</Link>
+            <Link type='button' to="/skills" className="btn btn-primary ms-2">Skills</Link>
+          </div>
+
+          <Routes>
+            <Route path='/' element={<Home/>}/>
+            <Route path='/skills' element={<SkillIndex/>}/>
+            <Route path='/skills/create' element={<SkillCreate/>}/>
+            <Route path='/skills/edit/:id' element={<SkillEdit/>}/>
+          </Routes>
+        </div>
+      </div>
+    </SkillProvider>
+
+
   );
 }
 
